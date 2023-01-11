@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:short_widgets/ui_widgets/loading.dart';
 
 class Sli extends SliverToBoxAdapter {
   const Sli({super.key, required Widget ch}) : super(child: ch);
@@ -264,7 +265,7 @@ class TexField extends TextFormField {
             hintStyle: Theme.of(ctx).textTheme.subtitle2!.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 14 /* * ratio */,
-                  color: Colors.white12,
+                  color: Colors.black26,
                 ),
             isDense: true,
             prefixIcon: prefix,
@@ -431,6 +432,7 @@ class EBtn extends StatelessWidget {
     this.padLeft,
     this.padRight,
     this.padTop,
+    this.loadCol,
     this.padVer,
     this.padOut,
     this.padOutBot,
@@ -451,6 +453,7 @@ class EBtn extends StatelessWidget {
   final bool? border;
   final Color? txcol;
   final Color? borCol;
+  final Color? loadCol;
   final FontWeight? weight;
   final Widget? ch;
   final double? pad;
@@ -517,13 +520,16 @@ class EBtn extends StatelessWidget {
             child: Box(
               ch: Center(
                   child: ch ??
-                      (/* text == ''
-                        ? Loading(color: Col.white)
-                        : */
-                          Text(
-                        '',
-                        style: TextStyle(fontSize: fSize),
-                      ))),
+                      (text == ''
+                          ? Loading(
+                              color: loadCol ?? Colors.white,
+                            )
+                          : Text(
+                              text ?? '',
+                              style: TextStyle(
+                                  fontSize: fSize,
+                                  color: txcol ?? Colors.white),
+                            ))),
               h: h,
               w: w,
             ),
